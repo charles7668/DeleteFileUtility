@@ -1,0 +1,13 @@
+*.aps
+*.idb
+*.ncp
+*.obj
+*.pch
+*.tmp
+*.sbr
+*.tmp
+*.pdb
+*.bsc
+*.ilk
+*.ncb
+*.opt 

@@ -37,9 +37,13 @@
             this.button_DeleteRule = new System.Windows.Forms.Button();
             this.textBox_OutputPrint = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button_LoadRule = new System.Windows.Forms.Button();
+            this.button_DeleteRuleFile = new System.Windows.Forms.Button();
             this.button_SaveRule = new System.Windows.Forms.Button();
             this.listBox_RuleFile = new System.Windows.Forms.ListBox();
+            this.button_Clear = new System.Windows.Forms.Button();
+            this.label_RuleFileList = new System.Windows.Forms.Label();
+            this.label_RuleList = new System.Windows.Forms.Label();
+            this.label_OutputPrint = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label_DirectoryPath
@@ -75,9 +79,9 @@
             // 
             this.listBox_RuleList.FormattingEnabled = true;
             this.listBox_RuleList.ItemHeight = 12;
-            this.listBox_RuleList.Location = new System.Drawing.Point(42, 129);
+            this.listBox_RuleList.Location = new System.Drawing.Point(42, 153);
             this.listBox_RuleList.Name = "listBox_RuleList";
-            this.listBox_RuleList.Size = new System.Drawing.Size(198, 232);
+            this.listBox_RuleList.Size = new System.Drawing.Size(198, 208);
             this.listBox_RuleList.TabIndex = 3;
             // 
             // textBox_Rule
@@ -129,15 +133,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button_LoadRule
+            // button_DeleteRuleFile
             // 
-            this.button_LoadRule.Font = new System.Drawing.Font("新細明體", 16F);
-            this.button_LoadRule.Location = new System.Drawing.Point(246, 266);
-            this.button_LoadRule.Name = "button_LoadRule";
-            this.button_LoadRule.Size = new System.Drawing.Size(75, 39);
-            this.button_LoadRule.TabIndex = 5;
-            this.button_LoadRule.Text = "讀取";
-            this.button_LoadRule.UseVisualStyleBackColor = true;
+            this.button_DeleteRuleFile.Font = new System.Drawing.Font("新細明體", 16F);
+            this.button_DeleteRuleFile.Location = new System.Drawing.Point(246, 266);
+            this.button_DeleteRuleFile.Name = "button_DeleteRuleFile";
+            this.button_DeleteRuleFile.Size = new System.Drawing.Size(75, 39);
+            this.button_DeleteRuleFile.TabIndex = 5;
+            this.button_DeleteRuleFile.Text = "刪檔";
+            this.button_DeleteRuleFile.UseVisualStyleBackColor = true;
+            this.button_DeleteRuleFile.Click += new System.EventHandler(this.button_DeleteRuleFile_Click);
             // 
             // button_SaveRule
             // 
@@ -148,27 +153,73 @@
             this.button_SaveRule.TabIndex = 5;
             this.button_SaveRule.Text = "儲存";
             this.button_SaveRule.UseVisualStyleBackColor = true;
+            this.button_SaveRule.Click += new System.EventHandler(this.button_SaveRule_Click);
             // 
             // listBox_RuleFile
             // 
             this.listBox_RuleFile.FormattingEnabled = true;
             this.listBox_RuleFile.ItemHeight = 12;
-            this.listBox_RuleFile.Location = new System.Drawing.Point(327, 176);
+            this.listBox_RuleFile.Location = new System.Drawing.Point(327, 200);
             this.listBox_RuleFile.Name = "listBox_RuleFile";
-            this.listBox_RuleFile.Size = new System.Drawing.Size(156, 184);
+            this.listBox_RuleFile.Size = new System.Drawing.Size(156, 160);
             this.listBox_RuleFile.TabIndex = 8;
             this.listBox_RuleFile.SelectedIndexChanged += new System.EventHandler(this.listBox_RuleFile_SelectedIndexChanged);
+            // 
+            // button_Clear
+            // 
+            this.button_Clear.Font = new System.Drawing.Font("新細明體", 16F);
+            this.button_Clear.Location = new System.Drawing.Point(42, 93);
+            this.button_Clear.Name = "button_Clear";
+            this.button_Clear.Size = new System.Drawing.Size(75, 30);
+            this.button_Clear.TabIndex = 9;
+            this.button_Clear.Text = "清空";
+            this.button_Clear.UseVisualStyleBackColor = true;
+            this.button_Clear.Click += new System.EventHandler(this.button_Clear_Click);
+            // 
+            // label_RuleFileList
+            // 
+            this.label_RuleFileList.AutoSize = true;
+            this.label_RuleFileList.Font = new System.Drawing.Font("新細明體", 16F);
+            this.label_RuleFileList.Location = new System.Drawing.Point(328, 175);
+            this.label_RuleFileList.Name = "label_RuleFileList";
+            this.label_RuleFileList.Size = new System.Drawing.Size(98, 22);
+            this.label_RuleFileList.TabIndex = 10;
+            this.label_RuleFileList.Text = "檔案列表";
+            // 
+            // label_RuleList
+            // 
+            this.label_RuleList.AutoSize = true;
+            this.label_RuleList.Font = new System.Drawing.Font("新細明體", 16F);
+            this.label_RuleList.Location = new System.Drawing.Point(38, 128);
+            this.label_RuleList.Name = "label_RuleList";
+            this.label_RuleList.Size = new System.Drawing.Size(98, 22);
+            this.label_RuleList.TabIndex = 11;
+            this.label_RuleList.Text = "檔案名稱";
+            // 
+            // label_OutputPrint
+            // 
+            this.label_OutputPrint.AutoSize = true;
+            this.label_OutputPrint.Font = new System.Drawing.Font("新細明體", 16F);
+            this.label_OutputPrint.Location = new System.Drawing.Point(485, 140);
+            this.label_OutputPrint.Name = "label_OutputPrint";
+            this.label_OutputPrint.Size = new System.Drawing.Size(98, 22);
+            this.label_OutputPrint.TabIndex = 10;
+            this.label_OutputPrint.Text = "訊息輸出";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(789, 401);
+            this.Controls.Add(this.label_RuleList);
+            this.Controls.Add(this.label_OutputPrint);
+            this.Controls.Add(this.label_RuleFileList);
+            this.Controls.Add(this.button_Clear);
             this.Controls.Add(this.listBox_RuleFile);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox_OutputPrint);
             this.Controls.Add(this.button_SaveRule);
-            this.Controls.Add(this.button_LoadRule);
+            this.Controls.Add(this.button_DeleteRuleFile);
             this.Controls.Add(this.button_DeleteRule);
             this.Controls.Add(this.button_AddRule);
             this.Controls.Add(this.textBox_Rule);
@@ -195,9 +246,13 @@
         private System.Windows.Forms.Button button_DeleteRule;
         private System.Windows.Forms.TextBox textBox_OutputPrint;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button_LoadRule;
+        private System.Windows.Forms.Button button_DeleteRuleFile;
         private System.Windows.Forms.Button button_SaveRule;
         private System.Windows.Forms.ListBox listBox_RuleFile;
+        private System.Windows.Forms.Button button_Clear;
+        private System.Windows.Forms.Label label_RuleFileList;
+        private System.Windows.Forms.Label label_RuleList;
+        private System.Windows.Forms.Label label_OutputPrint;
     }
 }
 

@@ -36,16 +36,27 @@ namespace DeleteFileUtility
         Hashtable RuleFile = new Hashtable();
         private void Form1_Load(object sender, EventArgs e)
         {
+            Load_RuleList();
+        }
+        private void Load_RuleList()
+        {
+            listBox_RuleFile.Items.Clear();
             string[] rulefile;
             rulefile = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.rule.txt");
-            foreach(string temp in rulefile)
+            foreach (string temp in rulefile)
             {
                 var rule = Regex.Match(temp, @"[\\](?<rule_name>[^.\\]+)[.]rule");
                 listBox_RuleFile.Items.Add(rule.Groups["rule_name"].Value.ToString());
-                RuleFile.Add(rule.Groups["rule_name"].Value.ToString(), temp);
+                try
+                {
+                    RuleFile.Add(rule.Groups["rule_name"].Value.ToString(), temp);
+                }
+                catch
+                {
+
+                }
             }
         }
-
         private void button_BrowseDir_Click(object sender, EventArgs e)
         {
             using (var dir = new FolderBrowserDialog())
@@ -159,6 +170,43 @@ namespace DeleteFileUtility
                     }
                 }
             }
+        }
+        string FileName = "rule";
+        public void Save_File(string filename)
+        {
+            string path = Directory.GetCurrentDirectory() + "\\" + filename + ".rule.txt";
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                foreach(var item in listBox_RuleList.Items)
+                {
+                    sw.WriteLine(item.ToString());
+                }
+            }
+            Load_RuleList();
+        }
+        private void button_SaveRule_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            Form_InputBox form_inputbox = new Form_InputBox(FileName);
+            form_inputbox.Owner = this;
+            form_inputbox.Show();
+        }
+
+        private void button_DeleteRuleFile_Click(object sender, EventArgs e)
+        {
+            if(listBox_RuleFile.Items.Count>0 && listBox_RuleFile.SelectedIndex >= 0)
+            {
+                string path = Directory.GetCurrentDirectory() + "\\" + listBox_RuleFile.Items[listBox_RuleFile.SelectedIndex].ToString() + ".rule.txt";
+                File.Delete(path);
+                string filename = listBox_RuleFile.Items[listBox_RuleFile.SelectedIndex].ToString();
+                Load_RuleList();
+                RuleFile.Remove(filename);
+            }
+        }
+
+        private void button_Clear_Click(object sender, EventArgs e)
+        {
+            listBox_RuleList.Items.Clear();
         }
     }
 }
